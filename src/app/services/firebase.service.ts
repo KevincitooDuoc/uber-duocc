@@ -15,6 +15,10 @@ export class FirebaseService {
 
   // ====================== Autenticacion ======================
 
+  getAuth() {
+    return getAuth();
+  }
+
   // === Acceder ===
 
   signIn(user: User) {
