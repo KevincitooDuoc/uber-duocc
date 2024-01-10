@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'modificar-viaje',
     loadChildren: () => import('./conductor/modificar-viaje/modificar-viaje.module').then( m => m.ModificarViajePageModule)
+  },
+  {
+    path: 'home-p',
+    loadChildren: () => import('./pasajero/home-p/home-p.module').then( m => m.HomePPageModule)
   }
 
 ];
