@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,14 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button color="secondary" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/crear-viaje']" >
-    <ion-icon slot="start" name="car"></ion-icon>
+<ion-content class="ion-text-center">
+
+  <ion-icon class="carHomec" color="dark" name="people"></ion-icon>
+
+  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/crear-viaje']" >
+    <ion-icon slot="start" name="create"></ion-icon>
      Crear viaje
   </ion-button>
 
-  <ion-button color="secondary" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/modificar-viaje']" >
-    <ion-icon slot="start" name="car"></ion-icon>
+  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/modificar-viaje']" >
+    <ion-icon slot="start" name="construct"></ion-icon>
      Modificar o Eliminar viaje
+  </ion-button>
+
+  <ion-button color="danger" expand="block" shape="round" class="ion-margin-top last-button" [routerLink]="['/main/help']" >
+     ¿Tienes un problema?
   </ion-button>
 </ion-content>

@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'home-p',
     loadChildren: () => import('./pasajero/home-p/home-p.module').then( m => m.HomePPageModule)
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help.module').then( m => m.HelpPageModule)
   }
 
 ];

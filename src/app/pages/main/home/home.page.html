@@ -1,32 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar >
+<ion-header>
+  <ion-toolbar color="dark">
     <ion-title>Bienvenido</ion-title>
-    <ion-button slot="end" (click)="signOut()">
-      Cerrar sesion
-    </ion-button>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  
+<ion-content class="ion-text-center">
 
-  <ion-text color="black" class="ion-margin-horizontal">
-    <h5 class="ion-margin-horizontal">Necesitas viajar a Duoc o a tu casa desde el Duoc, entonces presiona el siguiente boton :</h5>
-  </ion-text>
-  <ion-button color="secondary" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-p']" >
-    <ion-icon slot="start" name="car"></ion-icon>
-     Pasajero
-  </ion-button>
+  <ion-icon class="carHome" color="dark" name="speedometer-outline"></ion-icon>
 
-  <ion-item-divider>         
-  </ion-item-divider>
-  <ion-text color="black" class="ion-margin-horizontal">
-    <h5 class="ion-margin-horizontal">Te dirijes hacia Duoc o Te vas a tu casa en tu auto y puedes llevar a mas gente? entonces presiona el siguiente boton:</h5>
+  <ion-text color="black" class="ion-text-justify">
+    <h5 class="ion-margin-horizontal">¿Te dirijes hacia DuocUC? o ¿Te vas a tu casa en tu auto y puedes llevar a mas gente?
+      Entonces presiona el siguiente boton:</h5>
   </ion-text>
-  <ion-button color="secondary" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-c']">
+  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-c']">
     <ion-icon slot="start" name="speedometer"></ion-icon>
     Conductor
   </ion-button>
-    <ion-item-divider>         
-    </ion-item-divider>
+
+  <ion-icon class="carHome" color="dark" name="car-outline"></ion-icon>
+
+  <ion-text color="black" class="ion-text-justify">
+    <h5 class="ion-margin-horizontal">Necesitas viajar a DuocUC o a tu casa desde el Duoc, entonces presiona el siguiente
+      boton :</h5>
+  </ion-text>
+  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-p']">
+    <ion-icon slot="start" name="car"></ion-icon>
+    Pasajero
+  </ion-button>
 </ion-content>
