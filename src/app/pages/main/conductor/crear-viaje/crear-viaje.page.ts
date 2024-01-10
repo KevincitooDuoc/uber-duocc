@@ -32,7 +32,7 @@ export class CrearViajePage implements OnInit {
   async submit() {
     if (this.form.valid) {
 
-      let path = 'users/${this.user.uid/viajes}'
+      let path = 'users/' + this.user.email + '/viajes'
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
