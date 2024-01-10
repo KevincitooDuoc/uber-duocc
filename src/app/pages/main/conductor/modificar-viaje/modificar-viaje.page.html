@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Modificar viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form class="ion-align-self-center">
+    <ion-item lines="full" aria-disabled="false">
+      <ion-label position="floating">Patente</ion-label>
+      <ion-input disabled="true" type="text"  ></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating" class="ion-margin-bottom"> salida</ion-label>
+      <ion-datetime  class="ion-margin-top" presentation="time"></ion-datetime>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Destino</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Coste</ion-label>
+      <ion-input type="number" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button [routerLink]="['/home-c']" type="submit" color="danger" expand="block">modificar viaje</ion-button>
+        <ion-button [routerLink]="['/home-c']" type="submit" color="secondary" expand="block" class="ion-margin-top">Eliminar viaje</ion-button>           
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

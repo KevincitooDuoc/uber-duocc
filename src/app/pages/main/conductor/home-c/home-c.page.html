@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Conductor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button color="secondary" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/crear-viaje']" >
+    <ion-icon slot="start" name="car"></ion-icon>
+     Crear viaje
+  </ion-button>
+
+  <ion-button color="secondary" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/modificar-viaje']" >
+    <ion-icon slot="start" name="car"></ion-icon>
+     Modificar o Eliminar viaje
+  </ion-button>
+</ion-content>
