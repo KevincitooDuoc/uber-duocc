@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FirebaseService } from './services/firebase.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  
+  firebaseSvc = inject(FirebaseService);
+
+  constructor(private menuController: MenuController) {}
+
+      // === Cerrar sesion ===
+      signOut() {
+        this.firebaseSvc.signOut();
+        this.menuController.close();
+      }
+
+      closed() {
+        this.menuController.close();
+      }
+
 }
