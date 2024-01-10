@@ -6,28 +6,77 @@
     <ion-title class="ion-text-center">Programar viaje</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <form class="ion-margin-top">
-    <ion-item lines="full">
-      <ion-label position="floating">Patente</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating" class="ion-margin-bottom"> salida</ion-label>
-      <ion-datetime  class="ion-margin-top" presentation="time"></ion-datetime>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Destino</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Coste</ion-label>
-      <ion-input type="number" required></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/home-c']" type="submit" color="danger" expand="block">Programar viaje</ion-button>       
-      </ion-col>
-    </ion-row>
-  </form>
+  <div class="d-flex-center">
+      <form [formGroup]="form" class="auth-form" (ngSubmit)=" submit()" (keypress.enter)="submit()">
+          <!-- Patente -->
+          <app-custom-input 
+            autocomplete="patente" 
+            icon="person-outline" 
+            [control]="form.controls.patente" 
+            type="text" 
+            label="Patente">
+          </app-custom-input>
+          <div class="validators" *ngIf="form.controls.patente.errors && form.controls.patente.touched">
+              <div *ngIf="form.controls.patente.errors?.['required']">Ingrese su patente</div>
+              <div *ngIf="form.controls.patente.errors?.['minlenght']">La Patente tiene que tener 6 caracteres</div>
+          </div>
+
+          <!-- Salida -->
+          <app-custom-input 
+              autocomplete="salida" 
+              icon="mail-outline" 
+              [control]="form.controls.salida" 
+              type="text" 
+              label="Horario de salida">
+          </app-custom-input>
+          <div class="validators" *ngIf="form.controls.salida.errors && form.controls.salida.touched">
+              <div *ngIf="form.controls.salida.errors?.['required']">Ingrese un correo</div>
+          </div>
+
+          <!-- destino -->
+          <app-custom-input 
+              [control]="form.controls.destino" 
+              icon="lock-closed-outline"
+              type="text" 
+              label="Destino">>
+          </app-custom-input>
+          <div class="validators" *ngIf="form.controls.destino.errors && form.controls.destino.touched">
+              <div *ngIf="form.controls.destino.errors?.['required']">Ingrese una contraseña</div>
+          </div>
+
+           <!-- Coste -->
+           <app-custom-input 
+           [control]="form.controls.coste" 
+           icon="lock-closed-outline"
+           type="text" 
+           label="Coste">>
+          </app-custom-input>
+          <div class="validators" *ngIf="form.controls.coste.errors && form.controls.coste.touched">
+              <div *ngIf="form.controls.coste.errors?.['required']">Ingrese un coste</div>
+          </div>
+
+          <!-- pasajeros -->
+          <app-custom-input 
+          [control]="form.controls.pasajeros" 
+          icon="lock-closed-outline"
+          type="text" 
+          label="Pasajeros">>
+         </app-custom-input>
+         <div class="validators" *ngIf="form.controls.pasajeros.errors && form.controls.pasajeros.touched">
+             <div *ngIf="form.controls.pasajeros.errors?.['required']">Ingrese la cantidad de pasajeros</div>
+         </div>
+
+          <ion-button color="dark" expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+              Registrarse   
+              <ion-icon class="end" name="person-add-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button color="danger" expand="block" mode="ios" class="ion-margin-top" routerLink="/auth">
+            Volver  
+            <ion-icon class="end" name="arrow-back-outline"></ion-icon>
+          </ion-button>
+      </form>
+  </div>
 </ion-content>

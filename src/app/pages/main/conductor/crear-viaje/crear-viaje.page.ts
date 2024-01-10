@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'firebase/auth';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-crear-viaje',
@@ -7,9 +11,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearViajePage implements OnInit {
 
-  constructor() { }
+  form = new FormGroup({
+    id: new FormControl(''),
+    patente: new FormControl('',[Validators.required,Validators.minLength(6)]),
+    salida: new FormControl('', [Validators.required]),
+    destino: new FormControl('',[Validators.required]),
+    coste: new FormControl('',[Validators.required]),
+    pasajeros: new FormControl('',[Validators.required, Validators.max(1)])
+  })
 
+  user = {} as User;
   ngOnInit() {
+    this.user = this.utilsSvc.getFromLocalStorage('user')
   }
 
+  firebaseSvc = inject(FirebaseService);
+  utilsSvc = inject(UtilsService);
+
+
+  async submit() {
+    if (this.form.valid) {
+
+      let path = 'users/${this.user.uid/viajes}'
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+
+      delete this.form.value.id;
+
+      this.firebaseSvc.addDocument(path, this.form.value).then(async res => {
+       
+        this.utilsSvc.presentToast({
+          message: 'Viaje creado exitosamente',
+          duration: 3500,
+          color: 'success',
+          position: 'middle',
+          icon: 'checkmark-circle-outline'
+        })
+        
+
+      }).catch(error => {
+        console.log(error);
+
+        this.utilsSvc.presentToast({
+          message: error.message,
+          duration: 3500,
+          color: 'secondary',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+        })
+
+      }).finally(() => {
+        loading.dismiss();
+      })
+    }
+  }
+
+  
+  
 }
