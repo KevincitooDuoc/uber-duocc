@@ -16,6 +16,8 @@ export class HomePPage implements OnInit {
   utilsSvc = inject(UtilsService);
 
   viajes: Viaje[] = [];
+
+  
   
   ngOnInit() {
   }
@@ -37,5 +39,9 @@ export class HomePPage implements OnInit {
         sub.unsubscribe();
       }
     })
+  }
+
+  restar(v : Viaje){
+    v.pasajeros--;
   }
 }
