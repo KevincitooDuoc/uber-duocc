@@ -13,11 +13,11 @@ export class CrearViajePage implements OnInit {
 
   form = new FormGroup({
     id: new FormControl(''),
-    patente: new FormControl('',[Validators.required,Validators.minLength(6)]),
+    patente: new FormControl('',[Validators.required,Validators.minLength(6), Validators.maxLength(6),Validators.pattern('[a-zA-Z0-9 ]*')]),
     salida: new FormControl('', [Validators.required]),
-    destino: new FormControl('',[Validators.required]),
-    coste: new FormControl('',[Validators.required]),
-    pasajeros: new FormControl('',[Validators.required, Validators.max(1)]),
+    destino: new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(30),Validators.pattern('[a-zA-Z ]*')]),
+    coste: new FormControl('',[Validators.required, Validators.min(0),Validators.max(99999),Validators.pattern('[0-9]*')]),
+    pasajeros: new FormControl('',[Validators.required, Validators.min(1),Validators.max(9),Validators.pattern('[0-9]*')]),
     email : new FormControl(''),
   })
 

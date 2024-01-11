@@ -14,8 +14,8 @@ export class SignUpPage implements OnInit {
   form = new FormGroup({
     uid: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.minLength(2)])
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(2),Validators.pattern('[a-zA-Z]*')])
   })
 
   firebaseSvc = inject(FirebaseService);

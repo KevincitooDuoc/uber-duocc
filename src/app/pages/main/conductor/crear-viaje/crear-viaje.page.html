@@ -21,6 +21,8 @@
           <div class="validators" *ngIf="form.controls.patente.errors && form.controls.patente.touched">
               <div *ngIf="form.controls.patente.errors?.['required']">Ingrese su patente</div>
               <div *ngIf="form.controls.patente.errors?.['minlenght']">La Patente tiene que tener 6 caracteres</div>
+              <div *ngIf="form.controls.patente.errors?.['maxLength']">La Patente tiene que tener 6 caracteres</div>
+              <div *ngIf="form.controls.patente.errors?.['pattern']">La Patente tiene que tener solo caracteres alfanumericos</div>
           </div>
 
           <!-- Salida -->
@@ -28,11 +30,13 @@
               autocomplete="salida" 
               icon="mail-outline" 
               [control]="form.controls.salida" 
-              type="text" 
+              type="time"
+              min="00:00"
+              max="23:59" 
               label="Horario de salida">
           </app-custom-input>
           <div class="validators" *ngIf="form.controls.salida.errors && form.controls.salida.touched">
-              <div *ngIf="form.controls.salida.errors?.['required']">Ingrese un correo</div>
+              <div *ngIf="form.controls.salida.errors?.['required']">Ingrese una hora</div>
           </div>
 
           <!-- destino -->
@@ -43,7 +47,11 @@
               label="Destino">>
           </app-custom-input>
           <div class="validators" *ngIf="form.controls.destino.errors && form.controls.destino.touched">
-              <div *ngIf="form.controls.destino.errors?.['required']">Ingrese una contraseña</div>
+              <div *ngIf="form.controls.destino.errors?.['required']">Ingrese un destino</div>
+              <div *ngIf="form.controls.destino.errors?.['minlenght']">Ingrese un lugar correcto</div>
+              <div *ngIf="form.controls.destino.errors?.['maxLength']">Ingrese un lugar correcto</div>
+              <div *ngIf="form.controls.destino.errors?.['pattern']">Solo caracteres alfabeticos</div>
+
           </div>
 
            <!-- Coste -->
@@ -55,6 +63,9 @@
           </app-custom-input>
           <div class="validators" *ngIf="form.controls.coste.errors && form.controls.coste.touched">
               <div *ngIf="form.controls.coste.errors?.['required']">Ingrese un coste</div>
+              <div *ngIf="form.controls.coste.errors?.['min']">No pueden haber valores inferiores a 0</div>
+              <div *ngIf="form.controls.coste.errors?.['max']">Tampoco te pases</div>
+              <div *ngIf="form.controls.coste.errors?.['pattern']">Solo numeros</div>
           </div>
 
           <!-- pasajeros -->
@@ -66,6 +77,10 @@
          </app-custom-input>
          <div class="validators" *ngIf="form.controls.pasajeros.errors && form.controls.pasajeros.touched">
              <div *ngIf="form.controls.pasajeros.errors?.['required']">Ingrese la cantidad de pasajeros</div>
+             <div *ngIf="form.controls.pasajeros.errors?.['min']">No pueden haber valores inferiores a 1</div>
+             <div *ngIf="form.controls.pasajeros.errors?.['max']">No pueden haber valores mayores a 9</div>
+             <div *ngIf="form.controls.pasajeros.errors?.['pattern']">Solo numeros</div>
+             
          </div>
 
           <ion-button color="dark" expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
