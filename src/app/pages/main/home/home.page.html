@@ -7,27 +7,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-text-center">
+<ion-content class="ion-text-center" [fullscreen]="true">
 
-  <ion-icon class="carHome" color="dark" name="speedometer-outline"></ion-icon>
+  <!-- Sección de Conductor -->
+  <ion-card class="ion-margin">
+    <ion-card-header>
+      <div class="ion-text-center">
+        <ion-icon class="carHome" color="dark" name="speedometer-outline"></ion-icon>
+      </div>
+      <ion-card-subtitle>¿Te diriges hacia DuocUC o puedes llevar a más gente?</ion-card-subtitle>
+    </ion-card-header>
 
-  <ion-text color="black" class="ion-text-justify">
-    <h5 class="ion-margin-horizontal">¿Te dirijes hacia DuocUC? o ¿Te vas a tu casa en tu auto y puedes llevar a mas gente?
-      Entonces presiona el siguiente boton:</h5>
-  </ion-text>
-  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-c']">
-    <ion-icon slot="start" name="speedometer"></ion-icon>
-    Conductor
-  </ion-button>
+    <ion-card-content class="ion-text-justify">
+      <p>Presiona el siguiente botón si eres conductor:</p>
+      <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-c']">
+        <ion-icon slot="start" name="speedometer"></ion-icon>
+        Conductor
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-icon class="carHome" color="dark" name="car-outline"></ion-icon>
+  <!-- Sección de Pasajero -->
+  <ion-card class="ion-margin">
+    <ion-card-header>
+      <div class="ion-text-center">
+        <ion-icon class="carHome" color="dark" name="car-outline"></ion-icon>
+      </div>
+      <ion-card-subtitle>Necesitas viajar a DuocUC o a tu casa desde Duoc</ion-card-subtitle>
+    </ion-card-header>
 
-  <ion-text color="black" class="ion-text-justify">
-    <h5 class="ion-margin-horizontal">Necesitas viajar a DuocUC o a tu casa desde el Duoc, entonces presiona el siguiente
-      boton :</h5>
-  </ion-text>
-  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-p']">
-    <ion-icon slot="start" name="car"></ion-icon>
-    Pasajero
-  </ion-button>
+    <ion-card-content class="ion-text-justify">
+      <p>Presiona el siguiente botón si eres pasajero:</p>
+      <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/home-p']">
+        <ion-icon slot="start" name="car"></ion-icon>
+        Pasajero
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

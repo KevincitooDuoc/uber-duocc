@@ -20,12 +20,17 @@
       </div>
 
       <!-- Salida -->
-      <app-custom-input autocomplete="salida" icon="time-outline" [control]="form.controls.salida" type="text"
-        label="Horario de salida">
-      </app-custom-input>
+      <ion-item lines="full" style="border: 1px solid #ccc; border-radius: 15px; padding: 10px; display: flex; align-items: center;">
+        <ion-icon color="primary" class="end" name="time-outline"></ion-icon>
+        <h5 style="margin-left: 8px;">Hora de salida</h5>
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+          <ion-datetime presentation="time" formControlName="salida"></ion-datetime>
+        </div>
+      </ion-item>
       <div class="validators" *ngIf="form.controls.salida.errors && form.controls.salida.touched">
-        <div *ngIf="form.controls.salida.errors?.['required']">Ingrese un correo</div>
+        <div *ngIf="form.controls.salida.errors?.['required']">Ingrese una hora</div>
       </div>
+      
 
       <!-- destino -->
       <app-custom-input [control]="form.controls.destino" icon="map-outline" type="text" label="Destino">>
