@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getFirestore, setDoc, doc, getDoc, addDoc,collection } from '@angular/fire/firestore';
+import { getFirestore, setDoc, doc, getDoc, addDoc,collection, collectionData, query } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -70,4 +70,8 @@ export class FirebaseService {
     return addDoc(collection(getFirestore(), path), data);
   }
 
+  getCollectionData(path: string, collectionQuery?:any){
+    const ref = collection(getFirestore(), path);
+    return collectionData(query(ref, collectionQuery), {idField: 'id'});
+  }
 }

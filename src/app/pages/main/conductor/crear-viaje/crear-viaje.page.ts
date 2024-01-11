@@ -17,12 +17,14 @@ export class CrearViajePage implements OnInit {
     salida: new FormControl('', [Validators.required]),
     destino: new FormControl('',[Validators.required]),
     coste: new FormControl('',[Validators.required]),
-    pasajeros: new FormControl('',[Validators.required, Validators.max(1)])
+    pasajeros: new FormControl('',[Validators.required, Validators.max(1)]),
+    email : new FormControl(''),
   })
 
   user = {} as User;
   ngOnInit() {
-    this.user = this.utilsSvc.getFromLocalStorage('user')
+    this.user = this.utilsSvc.getFromLocalStorage('user');
+    
   }
 
   firebaseSvc = inject(FirebaseService);
@@ -32,11 +34,13 @@ export class CrearViajePage implements OnInit {
   async submit() {
     if (this.form.valid) {
 
-      let path = 'users/' + this.user.email + '/viajes'
+      let path ='/viajes'
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
       delete this.form.value.id;
+      
+      this.form.value.email = this.user.email;
 
       this.firebaseSvc.addDocument(path, this.form.value).then(async res => {
        

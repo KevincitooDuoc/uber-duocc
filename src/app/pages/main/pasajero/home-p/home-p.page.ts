@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { Viaje } from 'src/app/models/viaje.model';
+
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-home-p',
@@ -7,9 +12,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePPage implements OnInit {
 
-  constructor() { }
+  firebaseSvc = inject(FirebaseService);
+  utilsSvc = inject(UtilsService);
 
+  viajes: Viaje[] = [];
+  
   ngOnInit() {
   }
+  
+  user () : User{
+    return this.utilsSvc.getFromLocalStorage('user')
+  }
+  ionViewWillEnter(){
+   this.getViajes();
+  }
 
+  getViajes(){
+    let path ='/viajes';
+
+    let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+      next: (res: any)=> {
+        console.log(res);
+        this.viajes = res;
+        sub.unsubscribe();
+      }
+    })
+  }
 }

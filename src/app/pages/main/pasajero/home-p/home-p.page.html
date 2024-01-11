@@ -10,41 +10,13 @@
 <ion-content [fullscreen]="true">
   <ion-searchbar placeholder="¿A donde se dirije?"></ion-searchbar>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let v of viajes" >
       <ion-label>
-        <ion-label>Coronel</ion-label>
-        <ion-label>Coste: 10$</ion-label>
-        <ion-label>Salida: 10:30</ion-label>        
-      </ion-label>
-      <ion-button color="dark" slot="end" size="small"  shape="round">
-        Viajar
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <ion-label>Coronel</ion-label>
-        <ion-label>Coste: 10$</ion-label>
-        <ion-label>Salida: 10:30</ion-label>        
-      </ion-label>
-      <ion-button color="dark" slot="end" size="small"  shape="round">
-        Viajar
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <ion-label>Coronel</ion-label>
-        <ion-label>Coste: 10$</ion-label>
-        <ion-label>Salida: 10:30</ion-label>        
-      </ion-label>
-      <ion-button color="dark" slot="end" size="small"  shape="round">
-        Viajar
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <ion-label>Coronel</ion-label>
-        <ion-label>Coste: 10$</ion-label>
-        <ion-label>Salida: 10:30</ion-label>        
+        <ion-label>Coste: {{v.coste}}</ion-label>
+        <ion-label>Destino: {{v.destino}}</ion-label>    
+        <ion-label>Pasajeros: {{v.pasajeros}}</ion-label>
+        <ion-label>Patente: {{v.patente}}</ion-label> 
+        <ion-label>Hora de salida: {{v.salida}}</ion-label> 
       </ion-label>
       <ion-button color="dark" slot="end" size="small"  shape="round">
         Viajar
