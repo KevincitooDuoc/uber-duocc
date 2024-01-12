@@ -1,34 +1,29 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Modificar viaje</ion-title>
+    <ion-title>Mis Viajes</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <form class="ion-align-self-center">
-    <ion-item lines="full" aria-disabled="false">
-      <ion-label position="floating">Patente</ion-label>
-      <ion-input disabled="true" type="text"  ></ion-input>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <ion-label>Coronel</ion-label>
+        <ion-label>Coste: 1000$</ion-label>
+        <ion-label>Salida: 10:30</ion-label>        
+      </ion-label>
+      <ion-button id="open-action-sheet" color="dark" slot="end" size="small"  shape="round">
+        Modificar
+      </ion-button>
+      <ion-action-sheet trigger="open-action-sheet" header="Actions" [buttons]="actionSheetButtons"></ion-action-sheet>
     </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating" class="ion-margin-bottom"> salida</ion-label>
-      <ion-datetime  class="ion-margin-top" presentation="time"></ion-datetime>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Destino</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Coste</ion-label>
-      <ion-input type="number" required></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/home-c']" type="submit" color="danger" expand="block">modificar viaje</ion-button>
-        <ion-button [routerLink]="['/home-c']" type="submit" color="secondary" expand="block" class="ion-margin-top">Eliminar viaje</ion-button>           
-      </ion-col>
-    </ion-row>
-  </form>
+  </ion-list>
+  
+  <ion-button color="danger" expand="block" shape="round" class="ion-margin-top last-button" [routerLink]="['/main/home-c']" >
+    Volver
+ </ion-button>
+
 </ion-content>

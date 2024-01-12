@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActionSheetController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modificar-viaje',
@@ -7,9 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModificarViajePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
+  ) { }
+  
 
   ngOnInit() {
   }
+
+  public actionSheetButtons = [
+    {
+      text: 'Eliminar',
+      role: 'destructive',
+      data: {
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Modificar',
+      handler: () => {
+        this.navCtrl.navigateForward('/main/modificar-viaje2');
+      },
+    },
+    {
+      text: 'Cancelar',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
 
 }

@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'help',
     loadChildren: () => import('./help/help.module').then( m => m.HelpPageModule)
+  },
+  {
+    path: 'modificar-viaje2',
+    loadChildren: () => import('./conductor/modificar-viaje2/modificar-viaje2.module').then( m => m.ModificarViaje2PageModule)
   }
 
 ];

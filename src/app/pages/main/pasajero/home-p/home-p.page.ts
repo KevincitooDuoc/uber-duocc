@@ -42,6 +42,19 @@ export class HomePPage implements OnInit {
   }
 
   restar(v : Viaje){
-    v.pasajeros--;
+
+    if (v.pasajeros > 0){
+      v.pasajeros--;
+    }
+    else{
+      this.utilsSvc.presentToast({
+        message: 'no hay cupos disponibles',
+        duration: 3500,
+        color: 'danger',
+        position: 'middle',
+        icon: 'checkmark-circle-outline'
+      })
+    }
+
   }
 }

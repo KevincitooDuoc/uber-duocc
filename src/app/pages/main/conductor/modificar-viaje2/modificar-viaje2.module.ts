@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModificarViajePageRoutingModule } from './modificar-viaje-routing.module';
+import { ModificarViaje2PageRoutingModule } from './modificar-viaje2-routing.module';
 
-import { ModificarViajePage } from './modificar-viaje.page';
+import { ModificarViaje2Page } from './modificar-viaje2.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -14,10 +14,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ModificarViajePageRoutingModule,
-    SharedModule,
-    ReactiveFormsModule
+    ModificarViaje2PageRoutingModule,
+    ReactiveFormsModule,
+    SharedModule
   ],
-  declarations: [ModificarViajePage]
+  declarations: [ModificarViaje2Page]
 })
-export class ModificarViajePageModule {}
+export class ModificarViaje2PageModule {}
