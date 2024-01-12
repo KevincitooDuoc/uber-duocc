@@ -10,18 +10,6 @@
 <ion-content>
   <div class="d-flex-center">
     <form [formGroup]="form" class="auth-form" (ngSubmit)=" submit()" (keypress.enter)="submit()">
-      <!-- Patente -->
-      <app-custom-input autocomplete="patente" icon="document-text-outline" [control]="form.controls.patente"
-        type="text" label="Patente">
-      </app-custom-input>
-      <div class="validators" *ngIf="form.controls.patente.errors && form.controls.patente.touched">
-        <div *ngIf="form.controls.patente.errors?.['required']">Ingrese su patente</div>
-        <div *ngIf="form.controls.patente.errors?.['minlenght']">La Patente tiene que tener 6 caracteres</div>
-        <div *ngIf="form.controls.patente.errors?.['maxLength']">La Patente tiene que tener 6 caracteres</div>
-        <div *ngIf="form.controls.patente.errors?.['pattern']">La Patente tiene que tener solo caracteres alfanumericos
-        </div>
-      </div>
-
       <!-- Salida -->
       <app-custom-input autocomplete="salida" icon="time-outline" [control]="form.controls.salida" type="time"
         min="00:00" max="23:59" label="Horario de salida">
@@ -54,6 +42,7 @@
       <!-- pasajeros -->
       <app-custom-input [control]="form.controls.pasajeros" icon="people-outline" type="text" label="Pasajeros">>
       </app-custom-input>
+      
       <div class="validators" *ngIf="form.controls.pasajeros.errors && form.controls.pasajeros.touched">
         <div *ngIf="form.controls.pasajeros.errors?.['required']">Ingrese la cantidad de pasajeros</div>
         <div *ngIf="form.controls.pasajeros.errors?.['min']">No pueden haber valores inferiores a 1</div>
@@ -62,11 +51,11 @@
 
       </div>
 
-      <ion-button color="dark" expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid" [routerLink]="['/main/home']">
-        Agregar
+      <ion-button class="ion-padding" color="success" expand="full" shape="round" [routerLink]="['/main/home']">
+        Guardar Cambios
       </ion-button>
 
-      <ion-button color="danger" expand="block" mode="ios" class="ion-margin-top" routerLink="/auth">
+      <ion-button color="danger" expand="block" shape="round" class="ion-margin-top last-button" [routerLink]="['/main/home-c']" >
         Volver
       </ion-button>
     </form>
