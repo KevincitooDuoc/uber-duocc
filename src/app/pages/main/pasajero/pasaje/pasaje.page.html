@@ -9,6 +9,31 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-card class="custom-card">
+    <ion-card-header>
+      <ion-card-title>Detalles del Viaje</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-text>
+        <div style="font-size: 1.5em;">
+          <ion-label>Coronel</ion-label>
+        </div>
+        <div style="font-size: 1.5em;">
+          <ion-label>Coste: 1500$</ion-label>
+        </div>
+        <div style="font-size: 1.5em;">
+          <ion-label>Salida: 12:30</ion-label>
+        </div>
+        <div style="font-size: 1.5em;">
+          <ion-label>Asientos: 4</ion-label>
+        </div>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  
+  
+
   <ion-button color="success" expand="block" shape="round" class="ion-margin-top lastt-button" [routerLink]="['/main/home']" >
     Confirmar
   </ion-button>
