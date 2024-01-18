@@ -7,20 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-searchbar placeholder="¿A donde se dirije?"></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let v of viajes" >
-      <ion-label>
-        <ion-label>Coste: {{v.coste}}</ion-label>
-        <ion-label>Destino: {{v.destino}}</ion-label>    
-        <ion-label >Pasajeros: {{v.pasajeros}}</ion-label>
-        <ion-label>Patente: {{v.patente}}</ion-label> 
-        <ion-label>Hora de salida: {{v.salida}}</ion-label> 
-      </ion-label>
-      <ion-button color="dark" slot="end" size="small"  shape="round" value (click)="restar(v)">
-        Viajar
-      </ion-button>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-text-center">
+
+  <ion-icon class="carHomec" color="dark" name="people"></ion-icon>
+
+  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/pasajes']" >
+    <ion-icon slot="start" name="create"></ion-icon>
+     Buscar Viaje
+  </ion-button>
+
+  <ion-button color="dark" expand="block" shape="round" class="ion-margin-top" [routerLink]="['/main/pasajes']" >
+    <ion-icon slot="start" name="id-card-outline"></ion-icon>
+     Mis Viajes
+  </ion-button>
+
+  <ion-button color="danger" expand="block" shape="round" class="ion-margin-top last-button" [routerLink]="['/main/help']" >
+     ¿Tienes un problema?
+  </ion-button>
 </ion-content>
