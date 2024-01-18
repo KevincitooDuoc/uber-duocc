@@ -79,6 +79,13 @@ export class FirebaseService {
     return viajesCollection.doc(viajeId).update(nuevosDatos);
   }
 
+  marcarViajeCompleto(viajeId: string): Promise<void> {
+    const viajesCollection = this.firestore.collection('viajes'); // Reemplaza 'viajes' con el nombre real de tu colección
+
+    // Utiliza el método 'update' para marcar el viaje como completo
+    return viajesCollection.doc(viajeId).update({ completo: true });
+  }
+
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);
   }

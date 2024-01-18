@@ -19,6 +19,7 @@ export class CrearViajePage implements OnInit {
     coste: new FormControl('',[Validators.required, Validators.min(0),Validators.max(99999),Validators.pattern('[0-9]*')]),
     pasajeros: new FormControl('',[Validators.required, Validators.min(1),Validators.max(9),Validators.pattern('[0-9]*')]),
     email : new FormControl(''),
+    completo : new FormControl('false'),
   })
 
   user = {} as User;

@@ -4,7 +4,6 @@ import { User } from 'src/app/models/user.model';
 import { Viaje } from 'src/app/models/viaje.model';
 import { Router } from '@angular/router';
 
-
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -45,9 +44,15 @@ export class ModificarViajePage implements OnInit {
         {
           text: 'Completar Viaje',
           role: 'complete',
-          handler: () => {
-            // Lógica para cancelar el viaje
-            console.log('Completar viaje clicked', viaje);
+          handler: async () => {
+            // Lógica para marcar el viaje como completo
+            try {
+              await this.firebaseService.marcarViajeCompleto(viaje.id);
+              console.log('Completar viaje clicked', viaje);
+              this.filteredViajes = this.filteredViajes.filter(v => v !== viaje);
+            } catch (error) {
+              console.error('Error al completar el viaje:', error);
+            }
           }
         },
         {
@@ -105,7 +110,6 @@ export class ModificarViajePage implements OnInit {
   
     await confirmAlert.present();
   }
-  
 
   ngOnInit() {
     this.usuarioLogeado = this.user();
@@ -134,7 +138,7 @@ export class ModificarViajePage implements OnInit {
     let sub = this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any) => {
         console.log(res);
-        this.viajes = res.filter(viaje => viaje.email === this.usuarioLogeado.email);
+        this.viajes = res.filter(viaje => viaje.email === this.usuarioLogeado.email && !viaje.completo);
         this.filteredViajes = this.viajes;
         sub.unsubscribe();
       },
@@ -144,4 +148,4 @@ export class ModificarViajePage implements OnInit {
     });
   }
 
-} 
+}
