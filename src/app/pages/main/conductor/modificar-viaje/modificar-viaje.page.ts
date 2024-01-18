@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { User } from 'src/app/models/user.model';
 import { Viaje } from 'src/app/models/viaje.model';
+import { Router } from '@angular/router';
+
 
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -16,16 +18,97 @@ export class ModificarViajePage implements OnInit {
   constructor(
     private actionSheetController: ActionSheetController,
     private navCtrl: NavController,
+    private firebaseService: FirebaseService,
+    private alertController: AlertController,
+    private router: Router
   ) { }
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
   viajes: Viaje[] = [];
-  usuarioLogeado: User;  // Agrega esta línea para almacenar el usuario logeado
+  filteredViajes: Viaje[] = [];
+  usuarioLogeado: User;
+
+  async presentActionSheet(viaje: Viaje) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones de Modificación',
+      buttons: [
+        {
+          text: 'Modificar Detalles',
+          handler: () => {
+            // Lógica para modificar detalles
+            this.router.navigate(['/main/modificar-viaje2', { viajeId: viaje.id, viajeData: JSON.stringify(viaje) }]);
+          }
+        },
+        
+        {
+          text: 'Completar Viaje',
+          role: 'complete',
+          handler: () => {
+            // Lógica para cancelar el viaje
+            console.log('Completar viaje clicked', viaje);
+          }
+        },
+        {
+          text: 'Cancelar Viaje',
+          role: 'destructive',
+          handler: () => {
+            // Lógica para cancelar el viaje
+            this.cancelarViaje(viaje);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            // Lógica al cancelar el Action Sheet
+            console.log('Cancelar clicked');
+          }
+        }
+      ]
+    });
+
+    await actionSheet.present();
+  }
+
+  async cancelarViaje(viaje: Viaje) {
+    const confirmAlert = await this.alertController.create({
+      header: 'Confirmar Cancelación',
+      message: '¿Estás seguro de que deseas cancelar este viaje?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Canceló la cancelación del viaje');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            try {
+              // Llama al método de tu servicio para eliminar el viaje
+              await this.firebaseService.eliminarViaje(viaje.id);
+  
+              // Actualiza la lista local
+              this.filteredViajes = this.filteredViajes.filter(v => v !== viaje);
+  
+              console.log('Cancelar viaje clicked', viaje);
+            } catch (error) {
+              console.error('Error al cancelar el viaje:', error);
+            }
+          }
+        }
+      ]
+    });
+  
+    await confirmAlert.present();
+  }
+  
 
   ngOnInit() {
-    this.usuarioLogeado = this.user();  // Obtén el usuario logeado al inicializar el componente
+    this.usuarioLogeado = this.user();
   }
 
   user(): User {
@@ -34,6 +117,15 @@ export class ModificarViajePage implements OnInit {
 
   ionViewWillEnter() {
     this.getViajes();
+    this.filteredViajes = this.viajes;
+  }
+
+  filterViajes(event: any) {
+    const searchTerm = event.detail.value.toLowerCase();
+
+    this.filteredViajes = this.viajes.filter(viaje =>
+      viaje.destino.toLowerCase().includes(searchTerm)
+    );
   }
 
   getViajes() {
@@ -42,11 +134,14 @@ export class ModificarViajePage implements OnInit {
     let sub = this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any) => {
         console.log(res);
-        // Filtrar los viajes por el usuario logeado
         this.viajes = res.filter(viaje => viaje.email === this.usuarioLogeado.email);
+        this.filteredViajes = this.viajes;
         sub.unsubscribe();
+      },
+      error: (error) => {
+        console.error(error);
       }
-    })
+    });
   }
 
-}
+} 

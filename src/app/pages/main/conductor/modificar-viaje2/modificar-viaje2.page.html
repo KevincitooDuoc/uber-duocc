@@ -3,61 +3,45 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Programar Viaje</ion-title>
+    <ion-title>Reprogramar Viaje</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="d-flex-center">
-    <form [formGroup]="form" class="auth-form" (ngSubmit)=" submit()" (keypress.enter)="submit()">
-      <!-- Salida -->
-      <app-custom-input autocomplete="salida" icon="time-outline" [control]="form.controls.salida" type="time"
-        min="00:00" max="23:59" label="Horario de salida">
-      </app-custom-input>
-      <div class="validators" *ngIf="form.controls.salida.errors && form.controls.salida.touched">
-        <div *ngIf="form.controls.salida.errors?.['required']">Ingrese una hora</div>
-      </div>
 
-      <!-- destino -->
-      <app-custom-input [control]="form.controls.destino" icon="map-outline" type="text" label="Destino">>
-      </app-custom-input>
-      <div class="validators" *ngIf="form.controls.destino.errors && form.controls.destino.touched">
-        <div *ngIf="form.controls.destino.errors?.['required']">Ingrese un destino</div>
-        <div *ngIf="form.controls.destino.errors?.['minlenght']">Ingrese un lugar correcto</div>
-        <div *ngIf="form.controls.destino.errors?.['maxLength']">Ingrese un lugar correcto</div>
-        <div *ngIf="form.controls.destino.errors?.['pattern']">Solo caracteres alfabeticos</div>
+  <ion-content [fullscreen]="true">
+    <ion-card class="ion-margin">
+      <ion-card-header>
+        <ion-card-subtitle>Modificar Viaje</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Destino</ion-label>
+          <ion-input [(ngModel)]="viajeData.destino"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Coste</ion-label>
+          <ion-input [(ngModel)]="viajeData.coste"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Hora de Salida</ion-label>
+          <ion-input [(ngModel)]="viajeData.salida"></ion-input>
+        </ion-item>
 
-      </div>
+        <ion-item>
+          <ion-label position="stacked">Asientos</ion-label>
+          <ion-input [(ngModel)]="viajeData.pasajeros"></ion-input>
+        </ion-item>
+  
+        <ion-button class="ion-padding" color="success" expand="full" shape="round" (click)="guardarCambios()" >
+          Guardar Cambios
+        </ion-button>
+        
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
 
-      <!-- Coste -->
-      <app-custom-input [control]="form.controls.coste" icon="cash-outline" type="text" label="Coste">>
-      </app-custom-input>
-      <div class="validators" *ngIf="form.controls.coste.errors && form.controls.coste.touched">
-        <div *ngIf="form.controls.coste.errors?.['required']">Ingrese un coste</div>
-        <div *ngIf="form.controls.coste.errors?.['min']">No pueden haber valores inferiores a 0</div>
-        <div *ngIf="form.controls.coste.errors?.['max']">Tampoco te pases</div>
-        <div *ngIf="form.controls.coste.errors?.['pattern']">Solo numeros</div>
-      </div>
-
-      <!-- pasajeros -->
-      <app-custom-input [control]="form.controls.pasajeros" icon="people-outline" type="text" label="Pasajeros">>
-      </app-custom-input>
-      
-      <div class="validators" *ngIf="form.controls.pasajeros.errors && form.controls.pasajeros.touched">
-        <div *ngIf="form.controls.pasajeros.errors?.['required']">Ingrese la cantidad de pasajeros</div>
-        <div *ngIf="form.controls.pasajeros.errors?.['min']">No pueden haber valores inferiores a 1</div>
-        <div *ngIf="form.controls.pasajeros.errors?.['max']">No pueden haber valores mayores a 9</div>
-        <div *ngIf="form.controls.pasajeros.errors?.['pattern']">Solo numeros</div>
-
-      </div>
-
-      <ion-button class="ion-padding" color="success" expand="full" shape="round" [routerLink]="['/main/home']">
-        Guardar Cambios
-      </ion-button>
-
-      <ion-button color="danger" expand="block" shape="round" class="ion-margin-top last-button" [routerLink]="['/main/home-c']" >
-        Volver
-      </ion-button>
-    </form>
-  </div>
 </ion-content>

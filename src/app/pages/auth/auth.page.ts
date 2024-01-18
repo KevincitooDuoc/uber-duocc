@@ -75,9 +75,9 @@ export class AuthPage implements OnInit {
         console.log(error);
 
         this.utilsSvc.presentToast({
-          message: error.message,
+          message: `Credenciales Incorrectas`,
           duration: 3500,
-          color: 'secondary',
+          color: 'danger',
           position: 'middle',
           icon: 'alert-circle-outline'
         })
