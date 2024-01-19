@@ -45,14 +45,36 @@ export class ModificarViajePage implements OnInit {
           text: 'Completar Viaje',
           role: 'complete',
           handler: async () => {
-            // Lógica para marcar el viaje como completo
-            try {
-              await this.firebaseService.marcarViajeCompleto(viaje.id);
-              console.log('Completar viaje clicked', viaje);
-              this.filteredViajes = this.filteredViajes.filter(v => v !== viaje);
-            } catch (error) {
-              console.error('Error al completar el viaje:', error);
-            }
+            // Preguntar para confirmar la completitud del viaje
+            const confirmAlert = await this.alertController.create({
+              header: 'Confirmar Completar Viaje',
+              message: '¿Estás seguro de que deseas marcar este viaje como completo?',
+              buttons: [
+                {
+                  text: 'Cancelar',
+                  role: 'cancel',
+                  handler: () => {
+                    console.log('Canceló la completitud del viaje');
+                  }
+                },
+                {
+                  text: 'Confirmar',
+                  handler: async () => {
+                    try {
+                      // Llama al método de tu servicio para marcar el viaje como completo
+                      await this.firebaseService.marcarViajeCompleto(viaje.id);
+                      console.log('Completar viaje clicked', viaje);
+                      // Actualiza la lista local
+                      this.filteredViajes = this.filteredViajes.filter(v => v !== viaje);
+                    } catch (error) {
+                      console.error('Error al completar el viaje:', error);
+                    }
+                  }
+                }
+              ]
+            });
+  
+            await confirmAlert.present();
           }
         },
         {
