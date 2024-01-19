@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 import { User } from 'firebase/auth';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -19,7 +20,7 @@ export class CrearViajePage implements OnInit {
     coste: new FormControl('',[Validators.required, Validators.min(0),Validators.max(99999),Validators.pattern('[0-9]*')]),
     pasajeros: new FormControl('',[Validators.required, Validators.min(1),Validators.max(9),Validators.pattern('[0-9]*')]),
     email : new FormControl(''),
-    completo : new FormControl('false'),
+    completo: new FormControl(false),
   })
 
   user = {} as User;
@@ -27,6 +28,8 @@ export class CrearViajePage implements OnInit {
     this.user = this.utilsSvc.getFromLocalStorage('user');
     
   }
+
+  constructor(private navCtrl: NavController) {}
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
@@ -44,6 +47,8 @@ export class CrearViajePage implements OnInit {
       this.form.value.email = this.user.email;
 
       this.firebaseSvc.addDocument(path, this.form.value).then(async res => {
+
+        this.navCtrl.navigateRoot(['/main/home']);
        
         this.utilsSvc.presentToast({
           message: 'Viaje creado exitosamente',

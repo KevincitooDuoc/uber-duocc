@@ -1,5 +1,3 @@
-// completados.page.ts
-
 import { Component, OnInit, inject } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -12,11 +10,6 @@ import { Viaje } from 'src/app/models/viaje.model';
   styleUrls: ['./completados.page.scss'],
 })
 export class CompletadosPage implements OnInit {
-
-  constructor(
-    private firebaseService: FirebaseService,
-    private utilsService: UtilsService
-  ) { }
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);

@@ -59,30 +59,24 @@ export class FirebaseService {
   // === Documento ===
 
   async eliminarViaje(viajeId: string): Promise<void> {
-    // Referencia al documento que se eliminará
     const viajeRef = this.firestore.collection('viajes').doc(viajeId);
 
-    // Intenta eliminar el documento
     try {
       await viajeRef.delete();
     } catch (error) {
-      // Maneja el error, si es necesario
+
       console.error('Error al eliminar el viaje:', error);
-      throw error; // Puedes lanzar el error nuevamente para manejarlo en el componente
+      throw error;
     }
   }
 
   actualizarViaje(viajeId: string, nuevosDatos: Viaje): Promise<void> {
-    const viajesCollection = this.firestore.collection('viajes'); // Reemplaza 'viajes' con el nombre real de tu colección
-
-    // Utiliza el método 'update' para actualizar los datos del viaje
+    const viajesCollection = this.firestore.collection('viajes');
     return viajesCollection.doc(viajeId).update(nuevosDatos);
   }
 
   marcarViajeCompleto(viajeId: string): Promise<void> {
-    const viajesCollection = this.firestore.collection('viajes'); // Reemplaza 'viajes' con el nombre real de tu colección
-
-    // Utiliza el método 'update' para marcar el viaje como completo
+    const viajesCollection = this.firestore.collection('viajes');
     return viajesCollection.doc(viajeId).update({ completo: true });
   }
 
