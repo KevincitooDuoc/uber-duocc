@@ -36,16 +36,13 @@ export class ModificarViajePage implements OnInit {
         {
           text: 'Modificar Detalles',
           handler: () => {
-            // Lógica para modificar detalles
             this.router.navigate(['/main/modificar-viaje2', { viajeId: viaje.id, viajeData: JSON.stringify(viaje) }]);
           }
         },
-        
         {
           text: 'Completar Viaje',
           role: 'complete',
           handler: async () => {
-            // Preguntar para confirmar la completitud del viaje
             const confirmAlert = await this.alertController.create({
               header: 'Confirmar Completar Viaje',
               message: '¿Estás seguro de que deseas marcar este viaje como completo?',
@@ -61,10 +58,8 @@ export class ModificarViajePage implements OnInit {
                   text: 'Confirmar',
                   handler: async () => {
                     try {
-                      // Llama al método de tu servicio para marcar el viaje como completo
                       await this.firebaseService.marcarViajeCompleto(viaje.id);
                       console.log('Completar viaje clicked', viaje);
-                      // Actualiza la lista local
                       this.filteredViajes = this.filteredViajes.filter(v => v !== viaje);
                     } catch (error) {
                       console.error('Error al completar el viaje:', error);
@@ -73,7 +68,6 @@ export class ModificarViajePage implements OnInit {
                 }
               ]
             });
-  
             await confirmAlert.present();
           }
         },
@@ -81,7 +75,6 @@ export class ModificarViajePage implements OnInit {
           text: 'Cancelar Viaje',
           role: 'destructive',
           handler: () => {
-            // Lógica para cancelar el viaje
             this.cancelarViaje(viaje);
           }
         },
@@ -89,13 +82,11 @@ export class ModificarViajePage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            // Lógica al cancelar el Action Sheet
             console.log('Cancelar clicked');
           }
         }
       ]
     });
-
     await actionSheet.present();
   }
 
@@ -129,7 +120,6 @@ export class ModificarViajePage implements OnInit {
         }
       ]
     });
-  
     await confirmAlert.present();
   }
 
