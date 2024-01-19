@@ -14,11 +14,12 @@
       <ion-label>
         <ion-label>Coste: {{v.coste}}</ion-label>
         <ion-label>Destino: {{v.destino}}</ion-label>    
-        <ion-label >Pasajeros: {{v.pasajeros}}</ion-label>
+        <ion-label >Maximo de pasajeros: {{v.pasajeros}}</ion-label>
+        <ion-label >Disponibles: {{v.disponibles}}</ion-label>
         <ion-label>Patente: {{v.patente}}</ion-label> 
         <ion-label>Hora de salida: {{v.salida}}</ion-label> 
       </ion-label>
-      <ion-button color="dark" slot="end" size="small"  shape="round" value (click)="restar(v)">
+      <ion-button  color="dark" slot="end" size="small"  shape="round" (click)="presentActionSheet(v)">
         Viajar
       </ion-button>
     </ion-item>

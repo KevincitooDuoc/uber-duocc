@@ -80,6 +80,13 @@ export class FirebaseService {
     return viajesCollection.doc(viajeId).update({ completo: true });
   }
 
+  //disponibles
+  disponible(viajeId: string, dis: number ): Promise<void> {
+    const viajesCollection = this.firestore.collection('viajes');
+    
+    return viajesCollection.doc(viajeId).update({ disponibles: dis});
+  }
+
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);
   }

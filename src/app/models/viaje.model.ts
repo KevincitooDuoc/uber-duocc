@@ -5,6 +5,7 @@ export interface Viaje{
     destino: string,
     id: string,
     pasajeros: number,
+    disponibles: number,
     patente: string,
     salida: Time,
     completo: boolean
