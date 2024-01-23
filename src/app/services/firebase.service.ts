@@ -84,7 +84,14 @@ export class FirebaseService {
   disponible(viajeId: string, dis: number ): Promise<void> {
     const viajesCollection = this.firestore.collection('viajes');
     
-    return viajesCollection.doc(viajeId).update({ disponibles: dis});
+    return viajesCollection.doc(viajeId).update({ disponibles: dis,});
+  }
+
+  //agregar email pasajero
+  emailPasajerp(viajeId: string, email_viajero: string ): Promise<void> {
+    const viajesCollection = this.firestore.collection('viajes');
+    
+    return viajesCollection.doc(viajeId).update({ emailP: email_viajero});
   }
 
   setDocument(path: string, data: any) {

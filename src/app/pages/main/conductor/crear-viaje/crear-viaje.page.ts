@@ -21,6 +21,7 @@ export class CrearViajePage implements OnInit {
     pasajeros: new FormControl('',[Validators.required, Validators.min(1),Validators.max(9),Validators.pattern('[0-9]*')]),
     disponibles : new FormControl(''),
     email : new FormControl(''),
+    emailP : new FormControl(''),
     completo: new FormControl(false),
   })
 
@@ -47,6 +48,7 @@ export class CrearViajePage implements OnInit {
       
       this.form.value.email = this.user.email;
       this.form.value.disponibles = this.form.value.pasajeros;
+      this.form.value.emailP = "none"
 
       this.firebaseSvc.addDocument(path, this.form.value).then(async res => {
 

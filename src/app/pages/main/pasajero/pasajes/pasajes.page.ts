@@ -6,6 +6,7 @@ import { Viaje } from 'src/app/models/viaje.model';
 
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-pasajes',
@@ -22,6 +23,7 @@ export class PasajesPage implements OnInit {
   viajeData: Viaje;
   filteredViajes: Viaje[] = [];
   usuarioLogeado: User;
+  user = {} as User;
   
 
   constructor(
@@ -34,11 +36,10 @@ export class PasajesPage implements OnInit {
   
   ngOnInit() {
     this.viajeData = JSON.parse(this.activatedRoute.snapshot.paramMap.get('viajeData'));
+    this.user = this.utilsSvc.getFromLocalStorage('user');
   }
   
-  user () : User{
-    return this.utilsSvc.getFromLocalStorage('user')
-  }
+  
   ionViewWillEnter(){
    this.getViajes();
   }
@@ -85,9 +86,26 @@ export class PasajesPage implements OnInit {
           handler: async () => {
             // Lógica para marcar el viaje como completo
             try {
-              await this.firebaseService.disponible(viaje.id, viaje.disponibles-1);
+
+              
+              
+              await this.firebaseService.disponible(viaje.id, viaje.disponibles-1);              
+              await this.firebaseService.emailPasajerp(viaje.id, this.user.email);
+              
+              
+              
               console.log('Completar viaje clicked', viaje);
               this.filteredViajes = this.filteredViajes.filter(v => v !== viaje);
+              this.navCtrl.navigateRoot(['/main/home']);
+       
+              this.utilsSvc.presentToast({
+                message: 'Viaje Agregado exitosamente',
+                duration: 3500,
+                color: 'success',
+                position: 'middle',
+                icon: 'checkmark-circle-outline'
+              })
+
             } catch (error) {
               console.error('Error al completar el viaje:', error);
             }

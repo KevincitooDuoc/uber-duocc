@@ -46,6 +46,10 @@ const routes: Routes = [
   {
     path: 'completados',
     loadChildren: () => import('./conductor/completados/completados.module').then( m => m.CompletadosPageModule)
+  },
+  {
+    path: 'viaje',
+    loadChildren: () => import('./pasajero/viaje/viaje.module').then( m => m.ViajePageModule)
   }
 
 ];
