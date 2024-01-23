@@ -17,8 +17,9 @@
         <ion-label>Patente: {{v.patente}}</ion-label>
         <ion-label>Hora de salida: {{v.salida}}</ion-label>
       </ion-label>
-      <ion-button  color="dark" slot="end" size="small" shape="round">
-        Editar
+      <ion-button   color="dark" slot="end" size="small" shape="round"
+      (click)="presentActionSheet(v)" >
+        Cancelar
       </ion-button>
     </ion-item>
   </ion-list>

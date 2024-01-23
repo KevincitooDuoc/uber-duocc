@@ -50,29 +50,13 @@ export class PasajesPage implements OnInit {
     let sub = this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any)=> {
         console.log(res);
-        this.viajes = res.filter(viaje =>  !viaje.completo);
+        this.viajes = res.filter(viaje =>  !viaje.completo && viaje.emailP !== this.user.email);
         this.filteredViajes = this.viajes;
         sub.unsubscribe();
       }
     })
   }
-  // restar solo en el html
-  restar(v : Viaje){
-
-    if (v.pasajeros > 0){
-      v.pasajeros--;
-    }
-    else{
-      this.utilsSvc.presentToast({
-        message: 'no hay cupos disponibles',
-        duration: 3500,
-        color: 'danger',
-        position: 'middle',
-        icon: 'checkmark-circle-outline'
-      })
-    }
-
-  }
+  
 
   // Restar disponibilidad en la bdd
 
